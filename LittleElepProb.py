@@ -30,25 +30,26 @@
 #
 
 
-def solve(a: [], b: [], n: int):
-    ans = []
-
+def solve(s, n, t):
+    ans = ""
+    count = 0
     for i in range(0, n):
-        p = (a[i] * 20) - (b[i] * 10)
-        if p > 0:
-            ans.append(p)
+        if i == 0:
+            count += 1
+            ans += str(count) + " "
+            continue
+        elif s[i - 1] < s[i]:
+            count += 1
+            ans += str(count) + " "
         else:
-            ans.append(0)
-
-    ans.sort(reverse=True)
-    print(ans[0])
+            count = 1
+            ans += str(count) + " "
+    ans.rstrip()
+    print(f"Case #{t}: {ans}")
 
 
 t = int(input())
 for i in range(0, t):
     n = int(input())
-    a = input().split(" ")
-    a_arr = list(map(int, a))
-    b = input().split(" ")
-    b_arr = list(map(int, b))
-    solve(a_arr, b_arr, n)
+    s = input()
+    solve(s, n, i + 1)
